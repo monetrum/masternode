@@ -1,0 +1,6 @@
+scalar Datetime
+scalar Date
+scalar ObjectID
+scalar JSON
+scalar Binary
+scalar Long

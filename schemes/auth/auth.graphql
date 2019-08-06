@@ -1,0 +1,42 @@
+
+type RegisterPayload {
+    _id: ObjectID!,
+    email: String!,
+    password: String!
+}
+
+type TokenPayload {
+    account_id: ObjectID!,
+    token: String!,
+    expiry_time: Datetime!
+}
+
+type AuthQuery {
+    token(token: String!): TokenPayload
+}
+
+type LoginPayload {
+    _id: ObjectID!,
+    token: String!,
+}
+
+type ForgotPasswordPayload {
+    account_id: ObjectID!,
+    expiry_time: Datetime!,
+    created_at: Datetime!
+}
+
+type AuthMutation {
+    register(email: String!, password: String!): RegisterPayload!
+    login(email: String!, password: String!): LoginPayload!,
+    forgotPassword(email: String!): ForgotPasswordPayload!,
+    sendNewPassword(code: String!): Boolean!
+}
+
+type Query {
+    auth: AuthQuery!
+}
+
+type Mutation {
+    auth: AuthMutation!
+}

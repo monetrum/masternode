@@ -1,0 +1,11 @@
+
+
+type SmartContractInfoPayload {
+    address: String!,
+    public_key: String!
+}
+
+type Query{
+    smartContractInfo: SmartContractInfoPayload!
+}
+

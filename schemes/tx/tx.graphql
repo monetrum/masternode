@@ -1,0 +1,149 @@
+
+type TxListPayload {
+    transactions: [TxPayload!],
+    count: Int,
+    next_cursor: String
+}
+
+type TxPayload {
+    _id: ObjectID,
+    action_time: Long,
+    asset: String,
+    complete_time: Long,
+    hash: String,
+    nonce: String,
+    prev_hash: String,
+    seq: Int,
+    type: Int,
+    from: String,
+    fee_from: String,
+    fee: Float,
+    fee_asset: String,
+    to: String,
+    amount: Float,
+    desc: String,
+    contract_id: ObjectID,
+    confirm_rate: Int!,
+    data: JSON,
+    status: Int,
+    public_key: String,
+    sign: String,
+    contract_wallet: String
+}
+
+type GetTxPayload {
+    _id: ObjectID,
+    action_time: Long,
+    asset: String,
+    complete_time: Long,
+    hash: String,
+    nonce: String,
+    prev_hash: String,
+    seq: Int,
+    type: Int,
+    from: String
+    fee_from: String,
+    fee: Float,
+    fee_asset: String
+    to: String,
+    amount: Float,
+    desc: String,
+    contract_id: ObjectID,
+    confirm_rate: Int!,
+    data: JSON,
+    status: Int,
+    public_key: String,
+    sign: String,
+    contract_wallet: String
+}
+
+input TxListFilters {
+    account_id: ObjectID,
+    asset: StringOperators,
+    type: IntegerOperators,
+    seq: IntegerOperators,
+    from: StringOperators,
+    action_time: LongOperators,
+    complete_time: LongOperators,
+    my_tx: Boolean,
+    AND: [TxListFilters!],
+    OR: [TxListFilters!]
+}
+
+input TxFilters {
+    hash: String,
+    seq: Int
+}
+
+
+input TxSorting {
+    seq: OrderBy!,
+    _id: OrderBy!
+}
+
+input SendKeysInput {
+    private_key: String
+    public_key: String,
+    sign: String,
+}
+
+input SendParametersInput {
+    keys: SendKeysInput!,
+    from: String!,
+    to: String!,
+    amount: Float!,
+    asset: String!,
+    nonce: String!,
+    fee_from: String
+    desc: String,
+    data: JSON,
+    forms: JSON
+}
+
+type SendPayload {
+    _id: ObjectID!,
+    action_time: Long!,
+    amount: Float!,
+    asset: String!,
+    confirm_rate: Int,
+    desc: String,
+    data: JSON,
+    fee: Float!,
+    fee_asset: String!,
+    fee_from: String!,
+    hash: String!,
+    nonce: String!,
+    prev_hash: String!,
+    seq: Int!,
+    type: Int!,
+    from: String!,
+    to: String!,
+    sign: String,
+    complete_time: Long,
+    forms: JSON,
+    status: Int,
+    public_key: String,
+    contract_wallet: String
+}
+
+
+type TxQuery {
+    getTxList(filters: TxListFilters!, sorting: TxSorting!, cursor: String limit: Int): TxListPayload!,
+    getTx(filters: TxFilters!): GetTxPayload,
+    lastSeq: Int!
+}
+
+type Query {
+    tx: TxQuery!
+}
+
+
+type TxMutation {
+    send(parameters: SendParametersInput!): SendPayload!,
+    deleteTxData(hash: String!, public_key: String!): Boolean!,
+    updateConfirmRate(seq: Int!): Boolean!
+}
+
+type Mutation {
+    tx: TxMutation!
+}

@@ -1,0 +1,66 @@
+
+input GetAssetsFilters {
+    _id: ObjectIDOperators,
+    name: StringOperators,
+    symbol: StringOperators,
+    AND: [GetAssetsFilters!],
+    OR: [GetAssetsFilters!]
+}
+
+input GetAssetFilters {
+    name: String,
+    symbol: String,
+    _id: ObjectID
+}
+
+input GetAssetsSorting {
+    _id: OrderBy!
+}
+
+type AssetPayload {
+    _id: ObjectID!,
+    owner: ObjectID!,
+    genesis_wallet: String!,
+    genesis_block: String!,
+    name: String!,
+    symbol: String!
+    supply: Float!,
+    contract_id: ObjectID!,
+    date: Datetime,
+    icon: Binary,
+    fee: Float!,
+    exchange_rate: Float!
+}
+
+type GetAssetPayload {
+    _id: ObjectID!,
+    owner: ObjectID!,
+    genesis_wallet: String!,
+    genesis_block: String!,
+    name: String!,
+    symbol: String!
+    supply: Float!,
+    contract_id: ObjectID!,
+    date: Datetime,
+    icon: Binary,
+    fee: Float!,
+    exchange_rate: Float!,
+    total_transfer: Int,
+    total_price: Float
+}
+
+
+type GetAssetsPayload {
+    assets: [AssetPayload!],
+    count: Int!,
+    next_cursor: String
+}
+
+type AssetsQuery {
+    getAssets(filters: GetAssetsFilters!, sorting: GetAssetsSorting!, cursor: String, limit: Int): GetAssetsPayload!,
+    getAsset(filters: GetAssetFilters!): GetAssetPayload
+}
+
+type Query {
+    assets: AssetsQuery!
+}

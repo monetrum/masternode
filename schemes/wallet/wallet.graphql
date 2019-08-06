@@ -1,0 +1,120 @@
+
+type GetBalanceByWalletPayload {
+    asset: String!,
+    balance: Float!
+}
+
+type GetBalanceByAccountPayload {
+    wallets: [WalletBalancesPayload!],
+    count: Int!,
+    next_cursor: String
+}
+
+type WalletBalancesPayload {
+    address: String!,
+    balances: [BalancesPayload!]
+}
+
+
+type GenerateWalletPayload {
+    private_key: String!,
+    public_key: String!
+    address: String!,
+    contract_id: ObjectID
+}
+
+type SaveWalletPayload {
+    account_id: ObjectID!,
+    contract_id: ObjectID,
+    address: String!,
+    public_key: String!,
+    wallet_data: JSON
+}
+
+
+type GetWalletsPayload {
+    wallets: [WalletPayload!],
+    count: Int,
+    next_cursor: String
+}
+
+type Last5TxPayload {
+    _id: ObjectID,
+    action_time: String,
+    asset: String,
+    complete_time: String,
+    hash: String,
+    nonce: String,
+    prev_hash: String,
+    seq: Int,
+    type: Int,
+    from: String
+    fee_from: String,
+    fee: Float,
+    fee_asset: String,
+    to: String,
+    amount: Float,
+    desc: String,
+    data: JSON,
+    status: Int
+}
+
+type BalancesPayload {
+    asset: String!,
+    balance: Float!
+}
+
+type WalletPayload {
+    asset: String!,
+    address: String!,
+    contract_id: ObjectID,
+    insert_time: String!,
+    wallet_data: JSON,
+    last5tx: [Last5TxPayload!],
+    balances: [BalancesPayload!]
+}
+
+type UpdateWalletPayload {
+    public_key: String!,
+    contract_id: ObjectID,
+    asset: String!,
+    address: String!,
+    wallet_data: JSON
+}
+
+type GetWalletPayload {
+    public_key: String!,
+    contract_id: ObjectID,
+    asset: String!,
+    address: String!,
+    wallet_data: JSON
+}
+
+type GetWalletInfoPayload {
+    public_key: String!,
+    private_key: String!,
+    address: String!
+}
+
+
+type WalletQuery {
+    getBalanceByWallet(address: String!, assets: [String!]): [GetBalanceByWalletPayload!],
+    getBalancesByAccount(account_id: ObjectID, assets: [String!], cursor: String): GetBalanceByAccountPayload
+    getWallets(account_id: ObjectID, cursor: String): GetWalletsPayload!,
+    getWallet(public_key: String!, sign: String!): GetWalletPayload,
+    getWalletInfo(private_key: String!): GetWalletInfoPayload
+}
+
+type WalletMutation {
+    generate(account_id: ObjectID, contract_id: ObjectID, wallet_data: JSON): GenerateWalletPayload!
+    update(public_key: String!, sign: String!, contract_id: ObjectID, wallet_data: JSON): UpdateWalletPayload!
+    save(account_id: ObjectID, contract_id: ObjectID, public_key: String!, address: String!, wallet_data: JSON): SaveWalletPayload!
+}
+
+type Mutation {
+    wallet: WalletMutation!
+}
+
+type Query {
+    wallet: WalletQuery!
+}

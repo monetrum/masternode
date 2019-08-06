@@ -1,0 +1,12 @@
+
+type Pages {
+    name: String!,
+    value: Int!,
+    current: Boolean!,
+    cursor: String
+}
+
+type PageInfo {
+    pages: [Pages!],
+    count: Int!
+}

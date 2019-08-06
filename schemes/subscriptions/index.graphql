@@ -1,0 +1,106 @@
+
+type TxSubscriptionPayload {
+    _id: ObjectID!,
+    action_time: Long!,
+    hash: String!,
+    data: JSON,
+    amount: Float!,
+    sign: String,
+    asset: String!,
+    type: Int!,
+    seq: Int!,
+    prev_hash: String!,
+    desc: String,
+    fee_asset: String!,
+    fee: Float!
+    nonce: String!,
+    complete_time: Long,
+    from: String!,
+    to: String!,
+    contract_id: ObjectID,
+    fee_from: String!,
+    confirm_rate: Int!,
+    status: Int,
+    public_key: String,
+    contract_wallet: String
+}
+
+type WalletSubscriptionPayload {
+    _id: ObjectID!,
+    account_id: ObjectID!,
+    asset: String!,
+    address: String!,
+    insert_time: String!,
+    wallet_data: JSON,
+    contract_id: ObjectID
+}
+
+type AccountSubscriptionPhonePayload {
+    prefix: Int!,
+    number: String
+}
+
+type AccountSubscriptionPayload {
+    _id: ObjectID!,
+    email: String!,
+    password: String!,
+    status: Int!,
+    insert_date: Datetime!,
+    update_date: Datetime!,
+    name: String,
+    surname: String,
+    phone: AccountSubscriptionPhonePayload,
+    timezone: Int
+}
+
+type AssetSubscriptionPayload {
+    _id: ObjectID,
+    owner: ObjectID!,
+    genesis_wallet: String!,
+    genesis_block: String!,
+    name: String!,
+    symbol: String!,
+    supply: Float!,
+    contract_id: ObjectID,
+    date: Datetime,
+    fee: Float!,
+    exchange_rate: Float!,
+    icon: Binary
+}
+
+type ContractSubscriptionPayload {
+    _id: ObjectID,
+    account_id: ObjectID,
+    name: String,
+    code: Binary!,
+    created_date: Datetime!,
+    updated_date: Datetime!,
+    image: Binary,
+    desc: String,
+    detail: String,
+    is_private: Boolean
+}
+
+type TokenSubscriptionPayload {
+    _id: ObjectID!
+    account_id: ObjectID!,
+    token: String!,
+    expiry_time: Datetime!
+}
+
+type VericifactionCodeSubscriptionPayload {
+    type: Int!,
+    account_id: ObjectID!,
+    code: String!,
+    expiry_time: Datetime!
+}
+
+type Subscription {
+    tx(from: [String!]): [TxSubscriptionPayload!],
+    wallet: WalletSubscriptionPayload!,
+    account: AccountSubscriptionPayload!
+    asset: AssetSubscriptionPayload!,
+    contract: ContractSubscriptionPayload!,
+    token: TokenSubscriptionPayload!
+    vc: TokenSubscriptionPayload!
+}

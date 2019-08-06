@@ -1,0 +1,72 @@
+
+input SendSmartContractParametersInput {
+    contract_id: ObjectID!
+    public_key: String!,
+    from: String!,
+    to: String!,
+    amount: Float!,
+    asset: String!,
+    desc: String,
+    data: JSON,
+    forms: JSON
+}
+
+type SmartContractSendPayload {
+    _id: ObjectID!,
+    action_time: Long!,
+    amount: Float!,
+    asset: String!,
+    confirm_rate: Int,
+    desc: String,
+    data: JSON,
+    fee: Float!,
+    fee_asset: String!,
+    fee_from: String!,
+    hash: String!,
+    nonce: String!,
+    prev_hash: String!,
+    seq: Int!,
+    status: Int!,
+    type: Int!,
+    from: String!,
+    to: String!,
+    complete_time: Long,
+    forms: JSON,
+    public_key: String,
+    sign: String,
+    contract_wallet: String
+}
+
+input ApproveTxIds {
+    tx_id: ObjectID!,
+    data: JSON,
+}
+
+input CancelTxIds {
+    tx_id: ObjectID!,
+    data: JSON
+}
+
+input CreateAssetInfoInput {
+    contract_id: ObjectID!,
+    hash: String!,
+    owner: ObjectID!,
+    wallet: String!,
+    supply: Float!,
+    name: String!,
+    symbol: String!,
+    icon: String
+}
+
+
+type SmartContractPerformMutation {
+    send(parameters: SendSmartContractParametersInput!): SmartContractSendPayload!,
+    approve(tx_ids: [ApproveTxIds!]!, public_key: String): Boolean!,
+    cancel(tx_ids: [CancelTxIds!]!, public_key: String): Boolean!,
+    createAsset(info: CreateAssetInfoInput!): Boolean!,
+    burnAsset(public_key: String!, owner: ObjectID!, symbol: String!, amount: Float!): Boolean!
+}
+
+type Mutation {
+    smartContractPerform: SmartContractPerformMutation!
+}

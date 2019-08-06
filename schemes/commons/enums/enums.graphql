@@ -1,0 +1,10 @@
+enum AuthType {
+    Basic,
+    GAuth,
+    Email
+}
+
+enum OrderBy {
+    ASC,
+    DESC
+}

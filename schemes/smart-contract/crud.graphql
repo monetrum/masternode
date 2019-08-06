@@ -1,0 +1,83 @@
+
+input GetContractsFilter {
+    account_id: ObjectIDOperators,
+    _id: ObjectIDOperators,
+}
+
+input GetContractsSorting {
+    created_date: OrderBy!
+}
+
+type ContractPayload {
+    _id: ObjectID!,
+    account_id: ObjectID!
+    name: String,
+    code: Binary!,
+    desc: String,
+    detail: String,
+    image: Binary,
+    created_date: Datetime!,
+    updated_date: Datetime!,
+    is_private: Boolean!
+}
+
+type GetContractByAddressPayload {
+    _id: ObjectID!,
+    account_id: ObjectID!
+    name: String,
+    code: Binary!,
+    desc: String,
+    detail: String,
+    image: Binary,
+    created_date: Datetime!,
+    updated_date: Datetime!,
+    is_private: Boolean!
+}
+
+type CreateContractPayload {
+    _id: ObjectID!,
+    account_id: ObjectID!
+    name: String,
+    code: Binary!,
+    detail: String,
+    desc: String,
+    image: Binary,
+    created_date: Datetime!,
+    updated_date: Datetime!,
+    is_private: Boolean!
+}
+
+type GetContractsPayload {
+    contracts: [ContractPayload!],
+    count: Int!,
+    next_cursor: String
+}
+
+input CreateSmartContractInput {
+    account_id: ObjectID,
+    name: String,
+    code: String!,
+    desc: String,
+    detail: String,
+    image: String,
+    is_private: Boolean!
+}
+
+type SmartContractCrudMutation {
+    create(parameters: CreateSmartContractInput!): CreateContractPayload!
+}
+
+type SmartContractCrudQuery {
+    getContracts(filters: GetContractsFilter, sorting: GetContractsSorting!, cursor: String): GetContractsPayload!
+    getContract(contract_id: ObjectID!, account_id: ObjectID): ContractPayload,
+    getContractByAddress(address: String!): GetContractByAddressPayload
+}
+
+type Mutation {
+    smartContractCrud: SmartContractCrudMutation!
+}
+
+type Query{
+    smartContractCrud: SmartContractCrudQuery!
+}
+

@@ -1,0 +1,91 @@
+
+#input SearchOperators {
+#    search: String!
+#}
+
+input StringOperators {
+    eq: String,
+    ne: String,
+    in: [String],
+    notIn: [String],
+}
+
+input IntegerOperators {
+    eq: Int,
+    ne: Int,
+    in: [Int],
+    notIn: [Int],
+    contains: [Int],
+    gt: Int,
+    lt: Int,
+    gte: Int,
+    lte: Int
+}
+
+input LongOperators {
+    eq: Long,
+    ne: Long,
+    in: [Long],
+    notIn: [Long],
+    contains: [Long],
+    gt: Long,
+    lt: Long,
+    gte: Long,
+    lte: Long
+}
+
+input ObjectIDOperators {
+    eq: ObjectID,
+    ne: ObjectID,
+    in: [ObjectID],
+    notIn: [ObjectID],
+    contains: [ObjectID],
+    gt: ObjectID,
+    lt: ObjectID,
+    gte: ObjectID,
+    lte: ObjectID
+}
+
+
+
+input BooleanOperators {
+    eq: Boolean,
+    ne: Boolean
+}
+
+input FloatOperators {
+    eq: Float,
+    ne: Float,
+    in: [Float],
+    notIn: [Float],
+    contains: [Float],
+    gt: Float,
+    lt: Float,
+    gte: Float,
+    lte: Float
+}
+
+input DateOperators {
+    eq: Date,
+    ne: Date,
+    in: [Date],
+    notIn: [Date],
+    contains: [Date],
+    gt: Date,
+    lt: Date,
+    gte: Date,
+    lte: Date
+}
+
+
+input DatetimeOperators {
+    eq: Datetime,
+    ne: Datetime,
+    in: [Datetime],
+    notIn: [Datetime],
+    contains: [Datetime],
+    gt: Datetime,
+    lt: Datetime,
+    gte: Datetime,
+    lte: Datetime
+}

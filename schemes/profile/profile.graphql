@@ -1,0 +1,8 @@
+
+type ProfileMutation {
+    changePassword(old_password: String!, new_password: String!): Boolean!
+}
+
+type Mutation {
+    profile: ProfileMutation!
+}

@@ -1,0 +1,22 @@
+enum SystemStatus {
+    Active,
+    Disable,
+    Maintenance
+}
+
+type SystemStatusPayload {
+    status: SystemStatus,
+    message: String
+}
+
+type SystemQuery {
+    status: SystemStatusPayload!
+}
+
+type Query {
+    system: SystemQuery!
+}
+
+type Subscription {
+    systemStatus: SystemStatusPayload!
+}

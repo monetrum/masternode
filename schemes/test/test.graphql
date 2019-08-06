@@ -1,0 +1,7 @@
+type TestQuery {
+    ping: String!
+}
+
+type Query {
+    test: TestQuery!
+}

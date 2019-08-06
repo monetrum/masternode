@@ -1,0 +1,18 @@
+# import * from "./commons/scalars/scalars.graphql"
+# import * from "./commons/operators/operators.graphql"
+# import * from "./commons/enums/enums.graphql"
+# import * from "./commons/types/types.graphql"
+
+# import Query.* Mutation.*, Subscription.*, * from "./system/index.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./auth/auth.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./profile/profile.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./tx/tx.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./wallet/wallet.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./smart-contract/perform.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./smart-contract/crud.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./smart-contract/info.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./assets/assets.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./test/test.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./subscriptions/index.graphql"
+# import Query.* Mutation.*, Subscription.*, * from "./nodes/nodes.graphql"
+

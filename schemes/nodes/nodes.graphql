@@ -1,0 +1,80 @@
+
+
+input GetNodesFilters {
+    accessible_service: Boolean
+}
+
+input GetNodesSorting {
+    _id: OrderBy!
+}
+
+type LocationPayload {
+    country: String,
+    country_code: String,
+    city: String,
+    latitude: Float,
+    region: String,
+    longitude: Float
+}
+
+type AddNodePayload {
+    _id: ObjectID!,
+    ip: String!,
+    port: Int!
+    operating_system: String!,
+    network_speed: String!,
+    cpu: String!,
+    ram: String!,
+    hdd: String!,
+    location: LocationPayload!,
+    ssl: Boolean!
+}
+
+type NodePayload {
+    _id: ObjectID!,
+    ip: String!,
+    port: Int!
+    operating_system: String!,
+    network_speed: String!,
+    cpu: String!,
+    ram: String!,
+    hdd: String!,
+    location: LocationPayload!,
+    ssl: Boolean!,
+    accessible_service: Boolean!
+}
+
+type GetNodesPayload {
+    nodes: [NodePayload!],
+    count: Int,
+    next_cursor: String
+}
+
+input AddNodeInput {
+    port: Int!,
+    operating_system: String!,
+    network_speed: String!,
+    cpu: String!,
+    ram: String!,
+    hdd: String!,
+    ssl: Boolean!
+}
+
+
+type NodesQuery {
+    getNodes(filters: GetNodesFilters!, sorting: GetNodesSorting, limit: Int, cursor: String): GetNodesPayload!
+}
+
+type Query {
+    nodes: NodesQuery!
+}
+
+
+type NodesMutation {
+    addNode(info: AddNodeInput!): AddNodePayload!
+}
+
+type Mutation {
+    nodes: NodesMutation!
+}
+
